@@ -1,8 +1,8 @@
-# Wagner Custom Designs — company site
+# Argumentum Vitae — company site
 
-Commercial company homepage for **Wagner Custom Designs** (interim name). Custom design and hardware products for industry.
+Commercial company homepage for **Argumentum Vitae** (Latin for “proof of life”). Custom design and hardware products for industry. **Nody Bot** is our first product.
 
-**Nody Bot** is a **product sub-page** of the company site (`nody-bot.html`) — not a separate brand website. Same Wagner Custom Designs chrome/nav throughout. Company mark: rearing unicorn + wordmark on white + ice/sky blue (`#5EB3E8` family).
+**Nody Bot** is a **product sub-page** of the company site (`nody-bot.html`) — not a separate brand website. Same Argumentum Vitae chrome/nav throughout. Company mark: rearing unicorn + wordmark on white + ice/sky blue (`#5EB3E8` family).
 
 This repo remains named `nody-box-web` for now. Static GitHub Pages from the repository root. It is **not** the collector / ops dashboard. Product surface: **website + hardware device** (USB / `etctl` provisioning). No mobile apps.
 
@@ -28,8 +28,8 @@ Published at `https://roguespark-04.github.io/nody-box-web/` from branch **`main
 | --- | --- |
 | `index.html` | Company homepage only (Products · About · Contact) |
 | `nody-bot.html` | Nody Bot product sub-page (same company chrome; hero, how, why, specs, provisioning, sales) |
-| `privacy.html` / `terms.html` | Legal placeholders (Wagner Custom Designs) |
+| `privacy.html` / `terms.html` | Legal placeholders (Argumentum Vitae) |
 | `styles.css` | White + ice/sky blue + local IBM Plex |
 | `app.js` | Mobile nav |
-| `assets/wagner-unicorn-logo.png` | Company mark (ice/sky blue unicorn) |
+| `assets/argumentum-vitae-logo.png` | Company mark (ice/sky blue unicorn) |
 | `screenshots/` | Capture references |
