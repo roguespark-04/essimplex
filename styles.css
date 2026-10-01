@@ -28,41 +28,40 @@
   src: url("assets/fonts/plex-mono-400.woff2") format("woff2");
 }
 
-/* Argumentum Vitae — warm cream + charcoal + bronze, green as the "alive" signal.
-   Palette sampled from the AV monogram (assets/av-logo-original.jpg). */
+/* ESSIMPLEX — warm cream + charcoal + bronze.
+   Palette sampled from the ESSIMPLEX mark (assets/essimplex-logo-original.png):
+   cream #FFFBF2, charcoal "E" #3F3F41, bronze "X" #8B6440. The logo has no green;
+   green appears only as the tiny "online" status dot on the Nody Bot product page. */
 
 :root {
-  /* Surfaces (logo background is #FFFCF5) */
-  --bg: #faf7f0;
-  --bg-soft: #f3eee3;
-  --bg-muted: #ece5d6;
-  --bg-elevated: #fffdf8;
-  --bg-card: #fffdf8;
+  /* Surfaces (logo background is #FFFBF2) */
+  --bg: #faf6ee;
+  --bg-soft: #f3ede1;
+  --bg-muted: #ece4d4;
+  --bg-elevated: #fffbf2;
+  --bg-card: #fffbf2;
 
-  /* Charcoal (logo "A" #313133) */
+  /* Charcoal (logo "E" #3F3F41; body text a step deeper for legibility) */
   --text: #2b2b2d;
   --text-muted: #5a5249;
   --text-dim: #6b6358;
-  --charcoal: #313133;
-  --charcoal-deep: #232325;
-  --text-on-dark: #f5efe3;
-  --text-on-dark-muted: #cfc6b8;
-  --text-on-accent: #fffcf5;
+  --charcoal: #3f3f41;
+  --charcoal-deep: #2b2b2d;
+  --text-on-dark: #f6f0e4;
+  --text-on-dark-muted: #d0c7b9;
+  --text-on-accent: #fffbf2;
 
-  /* Bronze (logo "V" gradient #7F6344 → #5C4A34) */
-  --bronze: #7f6344;
-  --bronze-ink: #6e5439;
-  --bronze-deep: #5c4a34;
-  --bronze-light: #c9a77c;
-  --bronze-soft: rgba(127, 99, 68, 0.12);
-  --bronze-softer: rgba(127, 99, 68, 0.06);
-  --bronze-border: rgba(110, 84, 57, 0.32);
+  /* Bronze (logo "X" #8B6440; ink/deep are darker steps of the same hue for AA text) */
+  --bronze: #8b6440;
+  --bronze-ink: #7a5733;
+  --bronze-deep: #5e4326;
+  --bronze-light: #d8b58b;
+  --bronze-soft: rgba(139, 100, 64, 0.12);
+  --bronze-softer: rgba(139, 100, 64, 0.06);
+  --bronze-border: rgba(122, 87, 51, 0.32);
 
-  /* Green (logo heartbeat / port #3E9B4F) — sparingly: live / alive / success */
-  --green: #3e9b4f;
-  --green-ink: #2a6d37;
-  --green-light: #6bc47a;
-  --green-soft: rgba(62, 155, 79, 0.12);
+  /* Product-page "online" dot only (not part of the company palette) */
+  --status-online: #3e9b4f;
 
   --border: rgba(43, 43, 45, 0.1);
   --border-strong: rgba(43, 43, 45, 0.18);
@@ -172,7 +171,7 @@ code {
   top: 0;
   z-index: 100;
   height: var(--header-h);
-  background: rgba(250, 247, 240, 0.94);
+  background: rgba(250, 246, 238, 0.94);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
@@ -213,9 +212,9 @@ code {
 }
 
 .brand-name {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1rem;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.16em;
   color: var(--text);
   line-height: 1.2;
 }
@@ -301,7 +300,7 @@ code {
   background: var(--bronze-ink);
   color: var(--text-on-accent);
   border-color: var(--bronze-deep);
-  box-shadow: 0 1px 0 rgba(255, 252, 245, 0.18) inset, 0 2px 6px rgba(92, 74, 52, 0.22);
+  box-shadow: 0 1px 0 rgba(255, 251, 242, 0.18) inset, 0 2px 6px rgba(94, 67, 38, 0.22);
 }
 
 .btn-primary:hover {
@@ -339,11 +338,11 @@ code {
 .btn-ghost-light {
   background: transparent;
   color: var(--text-on-dark);
-  border-color: rgba(245, 239, 227, 0.4);
+  border-color: rgba(246, 240, 228, 0.4);
 }
 
 .btn-ghost-light:hover {
-  background: rgba(245, 239, 227, 0.08);
+  background: rgba(246, 240, 228, 0.08);
   border-color: var(--bronze-light);
   color: var(--text-on-dark);
 }
@@ -363,7 +362,7 @@ code {
   padding: 4.5rem 0 3.5rem;
   position: relative;
   background:
-    radial-gradient(ellipse 70% 60% at 88% 20%, rgba(127, 99, 68, 0.08), transparent 60%),
+    radial-gradient(ellipse 70% 60% at 88% 20%, rgba(139, 100, 64, 0.07), transparent 60%),
     var(--bg);
 }
 
@@ -432,7 +431,7 @@ code {
 
 .hero-logo {
   margin: 0 auto 1.25rem;
-  width: min(260px, 72%);
+  width: min(220px, 64%);
   height: auto;
 }
 
@@ -449,8 +448,48 @@ code {
   color: var(--text-dim);
 }
 
-/* Heartbeat rule — echoes the ECG line in the AV mark (charcoal line turning green,
-   ending at a "live" dot). Decorative only. */
+/* Company hero divider — hairlines meeting the small node network from the
+   ESSIMPLEX mark (charcoal nodes, two bronze). Decorative only. */
+.node-rule {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 3.25rem;
+}
+
+.node-rule-line {
+  flex: 1 1 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-strong) 18%);
+}
+
+.node-rule-line-end {
+  background: linear-gradient(90deg, var(--border-strong) 82%, transparent);
+}
+
+.node-rule-mark {
+  flex: 0 0 auto;
+  width: 27px;
+  height: 33px;
+  margin-inline: 0.5rem;
+  fill: var(--charcoal);
+  opacity: 0.85;
+}
+
+.node-rule-edges {
+  fill: none;
+  stroke: var(--charcoal);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.node-rule-accent {
+  fill: var(--bronze);
+}
+
+/* Product-page heartbeat rule — Nody Bot's outbound heartbeat, ending at a tiny
+   "online" dot (the only green on the site). Decorative only. */
 .pulse-rule {
   display: flex;
   align-items: center;
@@ -465,7 +504,7 @@ code {
 
 .pulse-flat-live {
   flex: 0 0 3.5rem;
-  background: var(--green);
+  background: var(--border-strong);
 }
 
 .pulse-blip {
@@ -565,23 +604,14 @@ code {
   margin-bottom: 0.75rem;
 }
 
-/* Green = alive. Used only as a small status signal. */
-.product-badge.is-live {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: var(--green-ink);
-  background: var(--green-soft);
-  border-color: rgba(47, 122, 62, 0.3);
-}
-
+/* Tiny "online" dot — used only on the Nody Bot product page heartbeat rule. */
 .status-dot {
   display: inline-block;
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 0 3px rgba(62, 155, 79, 0.18);
+  background: var(--status-online);
+  box-shadow: 0 0 0 3px rgba(62, 155, 79, 0.16);
   flex-shrink: 0;
 }
 
@@ -813,7 +843,7 @@ code {
 /* ========== CTA ========== */
 .section-cta {
   background:
-    radial-gradient(ellipse 60% 90% at 100% 0%, rgba(127, 99, 68, 0.28), transparent 60%),
+    radial-gradient(ellipse 60% 90% at 100% 0%, rgba(139, 100, 64, 0.22), transparent 60%),
     linear-gradient(160deg, var(--charcoal) 0%, var(--charcoal-deep) 100%);
   color: var(--text-on-dark);
   border-top: 3px solid var(--bronze);
@@ -855,8 +885,8 @@ code {
 
 .section-cta code {
   color: var(--text-on-dark);
-  background: rgba(245, 239, 227, 0.08);
-  border-color: rgba(245, 239, 227, 0.2);
+  background: rgba(246, 240, 228, 0.08);
+  border-color: rgba(246, 240, 228, 0.2);
 }
 
 /* ========== Footer ========== */
