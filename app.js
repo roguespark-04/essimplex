@@ -1,13 +1,25 @@
 /* ESSIMPLEX site behaviour. Progressive enhancement only: every element is
-   visible without this file. Motion respects prefers-reduced-motion. */
+   readable without this file. Motion respects prefers-reduced-motion and
+   only animates transform/opacity (counters update text). */
 (function () {
   "use strict";
 
-  var root = document.documentElement;
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var hasIO = "IntersectionObserver" in window;
-  var supports = function (q) { return window.CSS && CSS.supports && CSS.supports(q); };
-  if (!supports("animation-timeline: view()")) root.classList.add("no-sda");
+
+  /* ---------- Sticky header: solid once the page scrolls ---------- */
+  var header = document.getElementById("site-header");
+  if (header) {
+    var ticking = false;
+    var onScroll = function () {
+      header.classList.toggle("is-scrolled", window.scrollY > 24);
+      ticking = false;
+    };
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+    }, { passive: true });
+    onScroll();
+  }
 
   /* ---------- Mobile navigation ---------- */
   var toggle = document.getElementById("nav-toggle");
@@ -15,6 +27,7 @@
   if (toggle && nav) {
     var setOpen = function (open) {
       nav.classList.toggle("is-open", open);
+      if (header) header.classList.toggle("is-open", open);
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
     };
     toggle.addEventListener("click", function () {
@@ -29,46 +42,30 @@
         toggle.focus();
       }
     });
+    window.matchMedia("(min-width: 881px)").addEventListener("change", function (m) {
+      if (m.matches) setOpen(false);
+    });
   }
 
-  /* ---------- Headline word split (hero only) ---------- */
-  var wordIndex = 0;
-  function splitNode(node) {
-    Array.prototype.slice.call(node.childNodes).forEach(function (child) {
-      if (child.nodeType === 3) {
-        var parts = child.textContent.split(/(\s+)/);
-        var frag = document.createDocumentFragment();
-        parts.forEach(function (part) {
-          if (!part) return;
-          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
-          var outer = document.createElement("span");
-          var inner = document.createElement("span");
-          outer.className = "w";
-          inner.textContent = part;
-          inner.style.setProperty("--wi", wordIndex++);
-          outer.appendChild(inner);
-          frag.appendChild(outer);
-        });
-        node.replaceChild(frag, child);
-      } else if (child.nodeType === 1) {
-        splitNode(child);
-      }
-    });
-  }
-  document.querySelectorAll("[data-split]").forEach(function (el) {
-    if (reduce.matches) return;
-    el.setAttribute("aria-label", el.textContent.replace(/\s+/g, " ").trim());
-    wordIndex = 0;
-    splitNode(el);
-    Array.prototype.forEach.call(el.querySelectorAll(".w"), function (w) { w.setAttribute("aria-hidden", "true"); });
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () { el.classList.add("is-in"); });
-    });
-  });
+  /* ---------- Animated counters on fact stats ---------- */
+  var counters = Array.prototype.slice.call(document.querySelectorAll("[data-count]"));
+  var runCount = function (el) {
+    var target = parseFloat(el.getAttribute("data-count"));
+    var start = null;
+    var dur = 1300;
+    var step = function (t) {
+      if (start === null) start = t;
+      var p = Math.min(1, (t - start) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = String(Math.round(target * eased));
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
 
   /* ---------- Reveal on enter ---------- */
-  var revealables = document.querySelectorAll("[data-reveal], .no-sda .pulse");
-  if (!hasIO || reduce.matches) {
+  var revealables = document.querySelectorAll("[data-reveal]");
+  if (!hasIO || reduce) {
     revealables.forEach(function (el) { el.classList.add("is-in"); });
   } else {
     var revealIO = new IntersectionObserver(function (entries) {
@@ -80,19 +77,37 @@
       });
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
     revealables.forEach(function (el) { revealIO.observe(el); });
+
+    if (counters.length) {
+      counters.forEach(function (el) { el.textContent = "0"; });
+      var countIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            runCount(entry.target);
+            countIO.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.6 });
+      counters.forEach(function (el) { countIO.observe(el); });
+    }
   }
 
-  /* ---------- Live heartbeat dot: animate only while visible ---------- */
-  var live = document.querySelector(".live");
-  if (live && hasIO) {
-    new IntersectionObserver(function (entries) {
-      live.classList.toggle("is-live", entries[0].isIntersecting);
-    }).observe(live);
-  }
+  /* ---------- Loops that only run while on screen ---------- */
+  var toggleOnView = function (selector, cls) {
+    var els = document.querySelectorAll(selector);
+    if (!hasIO || !els.length) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) { entry.target.classList.toggle(cls, entry.isIntersecting); });
+    });
+    els.forEach(function (el) { io.observe(el); });
+  };
+  toggleOnView(".diagram", "is-playing");
+  toggleOnView(".live", "is-live");
 
-  /* ---------- Phone-home sequence: steps advance as you scroll ---------- */
+  /* ---------- Nody Bot check-in sequence: steps advance as you scroll ---------- */
   var how = document.querySelector(".how");
   if (how && hasIO) {
+    var seq = how.querySelector(".seq");
     var steps = Array.prototype.slice.call(how.querySelectorAll(".step"));
     var nodes = Array.prototype.slice.call(how.querySelectorAll(".seq__node"));
     var last = steps.length - 1;
@@ -105,29 +120,16 @@
         d.classList.toggle("is-current", i === n);
         d.classList.toggle("is-done", i <= n);
       });
-      how.style.setProperty("--seq", n <= 0 ? 0 : n / last);
+      if (seq) seq.style.setProperty("--seq", n <= 0 ? 0 : n / last);
     };
+    how.classList.add("is-stepping");
+    if (seq) seq.classList.add("is-stepping");
     setStep(-1);
     var stepIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) setStep(steps.indexOf(entry.target));
       });
-    }, { rootMargin: "-45% 0px -45% 0px" });
+    }, { rootMargin: "-42% 0px -42% 0px" });
     steps.forEach(function (s) { stepIO.observe(s); });
-  }
-
-  /* ---------- Scroll progress fallback (no CSS scroll timelines) ---------- */
-  var bar = document.querySelector(".progress");
-  if (bar && !supports("animation-timeline: scroll()") && !reduce.matches) {
-    var ticking = false;
-    var update = function () {
-      var max = root.scrollHeight - root.clientHeight;
-      bar.style.transform = "scaleX(" + (max > 0 ? root.scrollTop / max : 0) + ")";
-      ticking = false;
-    };
-    window.addEventListener("scroll", function () {
-      if (!ticking) { ticking = true; requestAnimationFrame(update); }
-    }, { passive: true });
-    update();
   }
 })();

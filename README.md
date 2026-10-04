@@ -24,21 +24,23 @@ Published at `https://roguespark-04.github.io/essimplex/` from branch **`main`**
 
 ## Design system
 
-- **Type:** Newsreader (variable, optical sizes; display and headings), IBM Plex Sans (body and UI), IBM Plex Mono (spec labels, data). All self-hosted in `assets/fonts/`, `font-display: swap`.
-- **Colour:** logo colours only. Cream `#FAF6EE` / paper `#FFFBF2`, charcoal `#2B2B2D` (full-bleed bands) / `#222224` (footer), copper-bronze `#8B6440` (headlines on cream, full-bleed copper bands with `#FFFBF2` text), `#7A5733` links, `#5E4326` hover, `#D8B58B` / `#C99A68` copper on charcoal. The single green `#3E9B4F` is the heartbeat dot on the Nody Bot page.
-- **Grid:** 12 columns, section index in columns 1-2, content offset to column 3. Sharp 2px corners throughout.
-- **Motion (`app.js` + CSS):** scroll-progress hairline, staggered reveals, hero headline word rise, scroll-linked pulse line (CSS scroll-driven animations, timed fallback), header-mark parallax, and the pinned Nody Bot phone-home sequence (wake, DHCP, POST, 2xx, sleep) that steps as you scroll. Everything is visible without JS; `prefers-reduced-motion` turns motion off.
+Corporate infrastructure/hardware look (modelled on sites such as applieddigital.com): dark full-bleed hero, bold grotesk headlines, solid CTA buttons, stat band, card grids, copper contact band.
+
+- **Type:** Manrope (variable 400-800, self-hosted `assets/fonts/manrope-var.woff2`, SIL OFL) for headlines, body and UI. IBM Plex Mono (`plex-mono-400.woff2`) only for small technical labels and code. `font-display: swap`.
+- **Colour:** logo colours only. Charcoal `#1E1E20` (hero, stat band, footer) / `#2B2B2D` (product + how-it-works bands) / `#3F3F41`; copper-bronze `#8B6440` (contact band, rules), `#7A5733` (links/eyebrows on cream), `#C99A68` (primary buttons) / `#D8B58B` (accents on dark); cream `#FAF6EE` and white. The single green `#3E9B4F` is the heartbeat dot on the Nody Bot page.
+- **Hero background:** CSS grid + inline SVG routed cable traces with one copper glow line and a travelling packet. No photos.
+- **Motion (`app.js` + CSS, transform/opacity only):** hero entrance, reveal on scroll, animated counters on the fact stats, card/button hover states, sticky nav that turns solid on scroll, home check-in strip that draws on enter, home check-in diagram packets, and the Nody Bot check-in sequence (wake, DHCP, POST, 2xx, sleep) that steps as you scroll. Everything is visible without JS; `prefers-reduced-motion` turns motion off.
 
 ## Layout
 
 | Path | Role |
 | --- | --- |
-| `index.html` | Company homepage only (Products · About · Contact) |
-| `nody-bot.html` | Nody Bot product sub-page (same company chrome; hero, how, why, specs, provisioning, sales) |
+| `index.html` | Company homepage (hero · capabilities · Nody Bot · facts · how it works · company · contact) |
+| `nody-bot.html` | Nody Bot product sub-page (hero · facts · how it works · why · specs · provisioning · contact) |
 | `privacy.html` / `terms.html` | Legal placeholders (ESSIMPLEX) |
 | `nody-box.html` | Redirect from the old product URL to `nody-bot.html` |
-| `styles.css` | Design system: tokens, grid, bands, components, motion |
-| `app.js` | Mobile nav, reveals, phone-home sequence, progress fallback |
+| `styles.css` | Design system: tokens, type, bands, components, motion |
+| `app.js` | Sticky nav state, mobile nav, reveals, counters, phone-home sequence |
 | `assets/essimplex-mark.png` / `essimplex-mark-720.png` / `essimplex-mark-sm.png` | EX mark (no wordmark), transparent (full-res / hero / header) |
 | `assets/essimplex-mark-sm-light.png` | EX mark reversed (cream E) for the charcoal footer |
 | `assets/essimplex-logo-full.png` / `essimplex-logo-full-640.png` | Full lockup (mark + wordmark), transparent |
