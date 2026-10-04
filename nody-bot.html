@@ -1,380 +1,305 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Nody Bot — battery-powered Ethernet phone-home for AI datacenter construction. ESP32 · W5500 · OLED · LiPo. Outbound heartbeat only; not pingable. USB / etctl provisioning." />
+  <title>Nody Bot | Battery Ethernet phone-home | ESSIMPLEX</title>
+  <meta name="description" content="Nody Bot by ESSIMPLEX: battery-powered Ethernet phone-home for AI datacenter construction. ESP32, W5500, OLED, LiPo. Outbound heartbeat only; not pingable. Provisioned over USB with etctl." />
   <meta name="theme-color" content="#FAF6EE" />
-  <title>Nody Bot — Battery Ethernet Phone-Home · ESSIMPLEX</title>
   <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="icon" href="assets/favicon-16.png" type="image/png" sizes="16x16" />
   <link rel="icon" href="assets/icon-192.png" type="image/png" sizes="192x192" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" sizes="180x180" />
+  <link rel="preload" href="assets/fonts/newsreader-roman.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/plex-sans-400.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="styles.css" />
+  <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js");</script>
+  <script src="app.js" defer></script>
 </head>
 <body class="page-product">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header" id="top">
+  <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="index.html" aria-label="ESSIMPLEX home">
-        <img class="brand-mark" src="assets/essimplex-mark-sm.png" srcset="assets/essimplex-mark-sm.png 115w, assets/essimplex-mark.png 1030w" sizes="37px" width="37" height="46" alt="" />
-        <span class="brand-wordmark">
-          <span class="brand-name">ESSIMPLEX</span>
-          <span class="brand-sub">Custom design · Hardware products</span>
-        </span>
+        <img src="assets/essimplex-mark-sm.png" width="30" height="38" alt="" />
+        <span class="brand-name">ESSIMPLEX</span>
       </a>
-
-      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
-        <span class="nav-toggle-bar" aria-hidden="true"></span>
-        <span class="nav-toggle-bar" aria-hidden="true"></span>
-        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav">
+        <span class="nav-toggle__label">Menu</span><span class="nav-toggle__bars" aria-hidden="true"></span>
       </button>
-
       <nav class="nav" id="primary-nav" aria-label="Primary">
-        <a href="index.html#products">Products</a>
+        <a href="nody-bot.html" aria-current="page">Nody Bot</a>
         <a href="index.html#about">About</a>
-        <a href="#contact" class="nav-cta">Contact</a>
+        <a class="btn btn--solid" href="#contact">Contact</a>
       </nav>
     </div>
+    <span class="progress" aria-hidden="true"></span>
   </header>
 
   <main id="main">
-    <div class="wrap breadcrumb-bar">
+    <div class="wrap">
       <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="index.html">ESSIMPLEX</a>
-        <span class="breadcrumb-sep" aria-hidden="true">/</span>
-        <span aria-current="page">Nody Bot</span>
+        <a href="index.html">ESSIMPLEX</a><span class="breadcrumb__sep" aria-hidden="true">/</span><span aria-current="page">Nody Bot</span>
       </nav>
     </div>
 
-    <!-- Product hero -->
-    <section class="hero product-hero" aria-labelledby="hero-heading">
-      <div class="wrap hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">Product · ESSIMPLEX</p>
-          <h1 id="hero-heading">Nody Bot</h1>
-          <p class="product-hero-tagline">Battery Ethernet phone-home for datacenter construction</p>
-          <p class="lede">
-            Hang it on the far end of a cable run. It sleeps for most of the build,
-            wakes on a schedule, and POSTs a heartbeat so you know the drop is still
-            alive — without PoE, without staying pingable, and without a mobile app.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#contact">Talk to sales</a>
-            <a class="btn btn-secondary" href="#specs">View specs</a>
+    <section class="p-hero" aria-labelledby="hero-heading">
+      <div class="wrap grid">
+        <div class="p-hero__copy">
+          <p class="label p-hero__sku" data-reveal>NBX-ETH-BAT &middot; Preliminary</p>
+          <h1 class="display p-hero__name split" id="hero-heading" data-split>Nody Bot</h1>
+          <p class="p-hero__motto serif-it" data-reveal style="--i:2">Not dead yet.</p>
+          <p class="p-hero__tagline" data-reveal style="--i:3">Battery Ethernet phone-home for datacenter construction</p>
+          <p class="lede" data-reveal style="--i:4">Hang it on the far end of a cable run. It sleeps for most of the build, wakes on a schedule, and POSTs a heartbeat so you know the drop is still alive. No PoE, and nothing left pingable.</p>
+          <div class="actions" data-reveal style="--i:5">
+            <a class="btn btn--solid" href="#contact">Talk to sales <svg class="arrow" viewBox="0 0 18 10" aria-hidden="true" focusable="false"><path d="M0 5h16M12 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+            <a class="link-arrow" href="#specs">View specifications</a>
           </div>
         </div>
-
-        <div class="hero-visual" aria-hidden="true">
-          <div class="hero-card product-hero-card">
-            <img class="hero-product-mark" src="assets/nody-bot-logo-lockup.png" width="280" height="120" alt="" />
-            <ul class="product-hero-chips">
-              <li>ESP32</li>
-              <li>W5500</li>
-              <li>OLED</li>
-              <li>LiPo</li>
-            </ul>
-            <p class="hero-card-meta">SKU NBX-ETH-BAT · Preliminary</p>
-          </div>
-        </div>
+        <aside class="p-hero__stack" aria-labelledby="stack-heading" data-reveal style="--i:6">
+          <h2 id="stack-heading">Hardware stack</h2>
+          <dl class="ledger">
+            <div><dt>MCU</dt><dd>ESP32</dd></div>
+            <div><dt>Ethernet</dt><dd>W5500</dd></div>
+            <div><dt>Display</dt><dd>OLED</dd></div>
+            <div><dt>Power</dt><dd>LiPo</dd></div>
+          </dl>
+        </aside>
       </div>
-      <div class="wrap pulse-rule" aria-hidden="true">
-        <span class="pulse-flat"></span>
-        <svg class="pulse-blip" viewBox="0 0 96 28" width="96" height="28" focusable="false">
-          <path class="pulse-line" d="M0 18 H30 L35 18 L40 11 L45 22 L52 3 L60 26 L66 14 L71 18 H96" />
-        </svg>
-        <span class="pulse-flat pulse-flat-live"></span>
-        <span class="status-dot"></span>
+      <div class="wrap p-hero__pulse">
+        <div class="pulse " aria-hidden="true">
+          <span class="pulse__flat pulse__flat--a"></span>
+          <svg class="pulse__beat" viewBox="0 0 96 64" focusable="false"><path pathLength="1" d="M0 32.5 H8 L18 18.5 L28 46.5 L44 4.5 L60 60.5 L72 22.5 L82 32.5 H96"/></svg>
+          <span class="pulse__flat pulse__flat--b"></span>
+          
+        </div>
+        <span class="live" aria-hidden="true"><span class="live__dot"></span><span class="label">heartbeat</span></span>
       </div>
     </section>
 
-    <!-- How it works -->
-    <section id="how" class="section section-soft">
-      <div class="wrap">
-        <header class="section-head">
-          <p class="eyebrow">How it works</p>
-          <h2>Sleep. Wake. Prove it. Sleep.</h2>
-          <p class="section-lede">
-            Built for multi-month cable plant builds — not always-on monitoring.
-            Website + device only; no mobile apps.
-          </p>
-        </header>
-
-        <ol class="steps">
-          <li>
-            <span class="step-num">01</span>
+    <section class="section band--charcoal how" id="how" aria-labelledby="how-heading">
+      <div class="wrap grid">
+        <div class="how__aside">
+          <div class="how__sticky">
+            <div class="how__head">
+              <p class="index"><span class="index__num">01</span><span class="index__name">How it works</span></p>
+              <h2 class="h2" id="how-heading" data-reveal>Sleep. Wake. Prove it. Sleep.</h2>
+              <p class="body" data-reveal style="--i:1">Built for multi-month cable plant builds, not always-on monitoring. One cycle, repeated for the life of the build:</p>
+            </div>
+            <div class="seq" aria-hidden="true">
+              <span class="seq__track"></span><span class="seq__fill"></span>
+              <ol class="seq__nodes">
+              <li class="seq__node" data-node="0"><span class="seq__dot"></span><span class="seq__name">Wake</span></li>
+              <li class="seq__node" data-node="1"><span class="seq__dot"></span><span class="seq__name">DHCP</span></li>
+              <li class="seq__node" data-node="2"><span class="seq__dot"></span><span class="seq__name">POST</span></li>
+              <li class="seq__node" data-node="3"><span class="seq__dot"></span><span class="seq__name">2xx</span></li>
+              <li class="seq__node" data-node="4"><span class="seq__dot"></span><span class="seq__name">Sleep</span></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <ol class="how__steps">
+          <li class="step" data-step="0">
+            <span class="step__num">01</span>
             <div>
-              <h3>Deep sleep</h3>
-              <p>Radio and MCU off. No listeners. Battery conserved for the long haul of the build schedule.</p>
+              <h3 class="h3">Wake</h3>
+              <p>A timer fires about every 15 minutes. Between wakes the radio and MCU are off, with no listeners, so the battery lasts the build schedule.</p>
+              <p class="step__meta"><span>~15 min, configurable</span></p>
             </div>
           </li>
-          <li>
-            <span class="step-num">02</span>
+          <li class="step" data-step="1">
+            <span class="step__num">02</span>
             <div>
-              <h3>Wake + DHCP</h3>
-              <p>Timer fires (~every 15 minutes). Ethernet comes up; the module obtains an address on the plant network.</p>
+              <h3 class="h3">DHCP</h3>
+              <p>Wired Ethernet comes up on the W5500 and the module obtains an address on the plant network.</p>
+              <p class="step__meta"><span>W5500</span><span>no Wi-Fi dependency</span></p>
             </div>
           </li>
-          <li>
-            <span class="step-num">03</span>
+          <li class="step" data-step="2">
+            <span class="step__num">03</span>
             <div>
-              <h3>POST heartbeat</h3>
-              <p>JSON status — unit id, battery, MAC, and more — POSTed to your collector endpoint.</p>
+              <h3 class="h3">POST</h3>
+              <p>A JSON heartbeat with unit id, battery, MAC and more is POSTed to <code>/et/phone-home</code> on your collector. The server is set as an IPv4 address; the device does no DNS lookup.</p>
+              <p class="step__meta"><span>HTTP POST</span><span>IPv4 server</span></p>
             </div>
           </li>
-          <li>
-            <span class="step-num">04</span>
+          <li class="step" data-step="3">
+            <span class="step__num">04</span>
             <div>
-              <h3>Confirm &amp; sleep</h3>
-              <p>Wait for HTTP 2xx (up to three tries), then return to deep sleep until the next wake.</p>
+              <h3 class="h3">2xx</h3>
+              <p>The unit waits for an HTTP 2xx from the collector, with an 8-second timeout and up to three tries.</p>
+              <p class="step__meta"><span>8 s timeout</span><span>up to 3 tries</span></p>
+            </div>
+          </li>
+          <li class="step" data-step="4">
+            <span class="step__num">05</span>
+            <div>
+              <h3 class="h3">Sleep</h3>
+              <p>It returns to deep sleep until the next wake. Nothing listens in between, so it is never pingable.</p>
+              <p class="step__meta"><span>deep sleep</span></p>
             </div>
           </li>
         </ol>
       </div>
     </section>
 
-    <!-- Why -->
-    <section id="why" class="section">
-      <div class="wrap">
-        <header class="section-head">
-          <p class="eyebrow">Why Nody Bot</p>
-          <h2>Proof it’s alive when the plant isn’t finished</h2>
-          <p class="section-lede">
-            During AI / HPC hall construction, cable drops sit unfinished for months.
-            You need to know they still work — without leaving something pingable on
-            an incomplete network, and without PoE at the far end.
-          </p>
-        </header>
-
-        <div class="detail-split">
-          <div>
-            <h3 class="subhead">Who it’s for</h3>
-            <ul class="plain-list">
-              <li>Datacenter construction and cable verification crews</li>
-              <li>Commissioning teams that need live confirmation across hundreds of drops</li>
-              <li>Integrators building AI / HPC halls on multi-month plant schedules</li>
-            </ul>
+    <section class="section" id="why" aria-labelledby="why-heading">
+      <div class="wrap grid">
+        <p class="index"><span class="index__num">02</span><span class="index__name">Why Nody Bot</span></p>
+        <div class="why__head">
+          <h2 class="h2" id="why-heading" data-reveal>Proof it&rsquo;s alive when the plant isn&rsquo;t finished.</h2>
+          <p class="lede" data-reveal style="--i:1">During AI and HPC hall construction, cable drops sit unfinished for months. You need to know they still work, without leaving something pingable on an incomplete network and without PoE at the far end.</p>
+        </div>
+        <div class="reasons">
+          <div class="reason" data-reveal>
+            <h3 class="h3">Not pingable by design</h3>
+            <p>Deep sleep between wakes. No ICMP, and no open ports waiting for scans on an unfinished plant.</p>
           </div>
-          <div>
-            <h3 class="subhead">Product truth</h3>
-            <ul class="plain-list">
-              <li>Battery-powered Ethernet phone-home (outbound only)</li>
-              <li>Not ICMP-pingable — no always-on listener</li>
-              <li>Purpose-built for datacenter construction timelines</li>
-              <li>Hardware stack: ESP32 · W5500 · OLED · LiPo</li>
-            </ul>
+          <div class="reason" data-reveal>
+            <h3 class="h3">Months on battery</h3>
+            <p>LiPo power, not PoE, so the far end works before power distribution is ready.</p>
+          </div>
+          <div class="reason" data-reveal>
+            <h3 class="h3">Your collector</h3>
+            <p>Heartbeats POST to your endpoint. This site is marketing; collector and operations software ships separately.</p>
           </div>
         </div>
-
-        <div class="why-grid">
-          <article class="why-card">
-            <h3>Not pingable by design</h3>
-            <p>Deep sleep between wakes. No ICMP, no open ports waiting for scans on an unfinished plant.</p>
-          </article>
-          <article class="why-card">
-            <h3>Months on battery</h3>
-            <p>LiPo power — not PoE — so the far end works before power distribution is ready.</p>
-          </article>
-          <article class="why-card">
-            <h3>Your collector</h3>
-            <p>Heartbeats POST to your endpoint. This site is marketing; collector / ops software ships separately.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Specs / datasheet -->
-    <section id="specs" class="section section-soft">
-      <div class="wrap">
-        <header class="section-head">
-          <p class="eyebrow">Specifications</p>
-          <h2>Datasheet (preliminary)</h2>
-          <p class="section-lede">
-            Hardware parameters for planning and RFQ. Specs may change before commercial availability.
-          </p>
-        </header>
-
-        <div class="datasheet">
-          <div class="datasheet-meta">
-            <p><span>SKU</span> NBX-ETH-BAT · Preliminary</p>
-            <p><span>Category</span> Network infrastructure hardware</p>
-            <a class="btn btn-secondary btn-sm" href="mailto:hello@essimplex.example?subject=Nody%20Bot%20datasheet%20request">Request datasheet</a>
-          </div>
-
-          <table class="specs-table">
-            <caption class="visually-hidden">Nody Bot hardware specifications</caption>
-            <thead>
-              <tr>
-                <th scope="col">Parameter</th>
-                <th scope="col">Specification</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Product / SKU</th>
-                <td>Nody Bot · NBX-ETH-BAT</td>
-              </tr>
-              <tr>
-                <th scope="row">Microcontroller</th>
-                <td>ESP32</td>
-              </tr>
-              <tr>
-                <th scope="row">Ethernet</th>
-                <td>W5500 wired Ethernet (no Wi‑Fi dependency in the plant)</td>
-              </tr>
-              <tr>
-                <th scope="row">Display</th>
-                <td>OLED — unit id, battery voltage, last confirmation</td>
-              </tr>
-              <tr>
-                <th scope="row">Power</th>
-                <td>LiPo battery (not PoE)</td>
-              </tr>
-              <tr>
-                <th scope="row">Wake interval</th>
-                <td>~15 minutes (configurable)</td>
-              </tr>
-              <tr>
-                <th scope="row">Reachability</th>
-                <td>Outbound HTTP POST only — not ICMP-pingable</td>
-              </tr>
-              <tr>
-                <th scope="row">Heartbeat payload</th>
-                <td>JSON status to customer collector endpoint</td>
-              </tr>
-              <tr>
-                <th scope="row">Provisioning</th>
-                <td>USB + <code>etctl</code> (no mobile apps)</td>
-              </tr>
-              <tr>
-                <th scope="row">Deployment</th>
-                <td>Far-end of cable runs during datacenter construction</td>
-              </tr>
-              <tr>
-                <th scope="row">Operating intent</th>
-                <td>Multi-month build schedules; deep sleep between wake windows</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- Provisioning -->
-    <section id="provisioning" class="section">
-      <div class="wrap provision-grid">
-        <header class="section-head">
-          <p class="eyebrow">Provisioning</p>
-          <h2>USB + <code>etctl</code></h2>
-          <p class="section-lede">
-            Configure units over USB with the <code>etctl</code> tool before they hit the plant.
-            No mobile apps — website + device only.
-          </p>
-          <ul class="plain-list">
-            <li>Set collector URL, unit identity, and wake interval</li>
-            <li>Verify battery and Ethernet bring-up on the bench</li>
-            <li>Ship configured modules to the far-end install crew</li>
+        <div class="audience" data-reveal>
+          <h3 class="h3">Who it&rsquo;s for</h3>
+          <ul>
+            <li>Datacenter construction and cable verification crews</li>
+            <li>Commissioning teams that need live confirmation across hundreds of drops</li>
+            <li>Integrators building AI and HPC halls on multi-month plant schedules</li>
           </ul>
-          <p class="provision-note">
-            What ships: Nody Bot module (ESP32 · W5500 · OLED · LiPo) and the USB
-            provisioning path. Collector backend is separate.
-          </p>
-        </header>
-        <aside class="provision-aside" aria-label="Provisioning summary">
-          <dl>
-            <div>
-              <dt>Interface</dt>
-              <dd>USB</dd>
-            </div>
-            <div>
-              <dt>Tool</dt>
-              <dd><code>etctl</code></dd>
-            </div>
-            <div>
-              <dt>Apps</dt>
-              <dd>None — no mobile apps</dd>
-            </div>
-            <div>
-              <dt>Surface</dt>
-              <dd>Website + hardware device</dd>
-            </div>
-          </dl>
-        </aside>
+        </div>
       </div>
     </section>
 
-    <!-- Sales / contact CTA -->
-    <section id="contact" class="section section-cta">
-      <div class="wrap cta-inner">
-        <div class="cta-copy">
-          <p class="eyebrow eyebrow-light">Sales &amp; contact</p>
-          <h2>Ready for a build or pilot?</h2>
-          <p>
-            Ask about Nody Bot availability, datasheets, or a custom design engagement
-            from ESSIMPLEX.
-          </p>
+    <section class="section band--paper" id="specs" aria-labelledby="specs-heading">
+      <div class="wrap grid">
+        <div class="specs__meta">
+          <div class="specs__sticky">
+            <p class="index"><span class="index__num">03</span><span class="index__name">Specifications</span></p>
+            <h2 class="h2" id="specs-heading" data-reveal>Datasheet</h2>
+            <p class="body" data-reveal style="--i:1">Preliminary hardware parameters for planning and RFQ. Specifications may change before commercial availability.</p>
+            <dl class="ledger" data-reveal style="--i:2">
+              <div><dt>SKU</dt><dd>NBX-ETH-BAT</dd></div>
+              <div><dt>Status</dt><dd>Preliminary</dd></div>
+              <div><dt>Category</dt><dd>Network infrastructure hardware</dd></div>
+            </dl>
+            <a class="btn btn--line" href="mailto:hello@essimplex.example?subject=Nody%20Bot%20datasheet%20request" data-reveal style="--i:3">Request datasheet <svg class="arrow" viewBox="0 0 18 10" aria-hidden="true" focusable="false"><path d="M0 5h16M12 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+          </div>
         </div>
-        <div class="cta-actions">
-          <a class="btn btn-on-dark" href="mailto:hello@essimplex.example?subject=Nody%20Bot%20inquiry">Email sales</a>
-          <a class="btn btn-ghost-light" href="index.html">← ESSIMPLEX</a>
+        <div class="specs__tables">
+          <div class="spec-group" data-reveal>
+            <h3 class="h3" id="spec-hw">Hardware</h3>
+            <table class="spec" aria-labelledby="spec-hw"><tbody>
+              <tr><th scope="row">Product / SKU</th><td>Nody Bot, NBX-ETH-BAT</td></tr>
+              <tr><th scope="row">Microcontroller</th><td>ESP32</td></tr>
+              <tr><th scope="row">Ethernet</th><td>W5500 wired Ethernet (no Wi-Fi dependency in the plant)</td></tr>
+              <tr><th scope="row">Display</th><td>OLED: unit id, battery voltage, last confirmation</td></tr>
+              <tr><th scope="row">Power</th><td>LiPo battery (not PoE)</td></tr>
+            </tbody></table>
+          </div>
+          <div class="spec-group" data-reveal>
+            <h3 class="h3" id="spec-net">Network behaviour</h3>
+            <table class="spec" aria-labelledby="spec-net"><tbody>
+              <tr><th scope="row">Wake interval</th><td>~15 minutes (configurable)</td></tr>
+              <tr><th scope="row">Reachability</th><td>Outbound HTTP POST only; not ICMP-pingable</td></tr>
+              <tr><th scope="row">Heartbeat payload</th><td>JSON status to customer collector endpoint</td></tr>
+              <tr><th scope="row">Endpoint</th><td><code>POST /et/phone-home</code></td></tr>
+              <tr><th scope="row">Confirmation</th><td>HTTP 2xx; 8 s timeout, up to 3 tries</td></tr>
+              <tr><th scope="row">Server address</th><td>IPv4 address (no DNS)</td></tr>
+            </tbody></table>
+          </div>
+          <div class="spec-group" data-reveal>
+            <h3 class="h3" id="spec-dep">Deployment</h3>
+            <table class="spec" aria-labelledby="spec-dep"><tbody>
+              <tr><th scope="row">Provisioning</th><td>USB + <code>etctl</code> (no mobile apps)</td></tr>
+              <tr><th scope="row">Deployment</th><td>Far end of cable runs during datacenter construction</td></tr>
+              <tr><th scope="row">Operating intent</th><td>Multi-month build schedules; deep sleep between wake windows</td></tr>
+            </tbody></table>
+          </div>
         </div>
-        <p class="cta-note">
-          Placeholder address for now — replace with your production inbox when ready.
-          Or open a note via
-          <a href="https://github.com/roguespark-04/nody-box-web">GitHub</a>.
-        </p>
+      </div>
+    </section>
+
+    <section class="section band--copper" id="provisioning" aria-labelledby="prov-heading">
+      <div class="wrap grid">
+        <p class="index"><span class="index__num">04</span><span class="index__name">Provisioning</span></p>
+        <div class="prov__head">
+          <h2 class="h2" id="prov-heading" data-reveal>Configured over USB with <code>etctl</code>.</h2>
+          <p class="body lede" data-reveal style="--i:1">Units are set up on the bench before they reach the plant. The product surface is this website and the hardware device.</p>
+        </div>
+        <ol class="prov__list" data-reveal style="--i:2">
+          <li>Set the collector address (IPv4), unit identity and wake interval</li>
+          <li>Verify battery and Ethernet bring-up on the bench</li>
+          <li>Ship configured modules to the far-end install crew</li>
+        </ol>
+        <div class="prov__ships" data-reveal>
+          <p class="label">What ships</p>
+          <p>The Nody Bot module (ESP32, W5500, OLED, LiPo) and the USB provisioning path. The collector backend is separate.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section band--charcoal p-contact" id="contact" aria-labelledby="contact-heading">
+      <div class="wrap grid">
+        <p class="index"><span class="index__num">05</span><span class="index__name">Sales</span></p>
+        <div class="contact__main">
+          <h2 class="h2" id="contact-heading" data-reveal>Ready for a build or pilot?</h2>
+          <p class="body lede" data-reveal style="--i:1">Ask about Nody Bot availability, datasheets, or a custom design engagement from ESSIMPLEX.</p>
+          <a class="contact__mail" href="mailto:hello@essimplex.example?subject=Nody%20Bot%20inquiry" data-reveal style="--i:2">hello@essimplex.example</a>
+          <div class="actions" data-reveal style="--i:3">
+            <a class="btn btn--solid" href="mailto:hello@essimplex.example?subject=Nody%20Bot%20inquiry">Email sales <svg class="arrow" viewBox="0 0 18 10" aria-hidden="true" focusable="false"><path d="M0 5h16M12 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+            <a class="link-arrow" href="index.html">ESSIMPLEX home</a>
+          </div>
+        </div>
+        <div class="contact__note">
+          <p>The address above is a placeholder until the production inbox is set up.</p>
+          <p>You can also open a note on <a href="https://github.com/roguespark-04/nody-box-web">GitHub</a>.</p>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="wrap footer-grid">
-      <div class="footer-brand">
-        <a class="brand brand-footer" href="index.html" aria-label="ESSIMPLEX home">
-          <img class="brand-mark" src="assets/essimplex-mark-sm.png" srcset="assets/essimplex-mark-sm.png 115w, assets/essimplex-mark.png 1030w" sizes="32px" width="32" height="40" alt="" />
+    <div class="wrap grid">
+      <div class="footer__brand">
+        <a class="brand" href="index.html" aria-label="ESSIMPLEX home">
+          <img src="assets/essimplex-mark-sm-light.png" width="34" height="43" alt="" loading="lazy" />
           <span class="brand-name">ESSIMPLEX</span>
         </a>
-        <p class="footer-tagline">
-          Nody Bot is a product of ESSIMPLEX — battery Ethernet phone-home
-          for datacenter cable plant verification.
-        </p>
+        <p>Custom design and hardware products for industry. Nody Bot is our first product.</p>
       </div>
-
-      <nav class="footer-col" aria-label="Product">
-        <h3>Nody Bot</h3>
+      <nav class="footer__col" aria-label="Products">
+        <h2>Products</h2>
         <ul>
-          <li><a href="#how">How it works</a></li>
-          <li><a href="#why">Why</a></li>
-          <li><a href="#specs">Specifications</a></li>
-          <li><a href="#provisioning">Provisioning</a></li>
+          <li><a href="nody-bot.html">Nody Bot</a></li>
+          <li><a href="nody-bot.html#specs">Specifications</a></li>
         </ul>
       </nav>
-
-      <nav class="footer-col" aria-label="Company">
-        <h3>Company</h3>
+      <nav class="footer__col" aria-label="Company">
+        <h2>Company</h2>
         <ul>
-          <li><a href="index.html">Home</a></li>
           <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#products">All products</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
           <li><a href="https://github.com/roguespark-04/nody-box-web">GitHub</a></li>
         </ul>
       </nav>
-
-      <nav class="footer-col" aria-label="Legal">
-        <h3>Legal</h3>
+      <nav class="footer__col" aria-label="Legal">
+        <h2>Legal</h2>
         <ul>
           <li><a href="privacy.html">Privacy policy</a></li>
           <li><a href="terms.html">Terms of use</a></li>
         </ul>
       </nav>
-    </div>
-    <div class="wrap footer-bottom">
-      <p>© 2026 ESSIMPLEX. All rights reserved.</p>
-      <p class="footer-meta"><a href="index.html">Company home</a> · Nody Bot product page</p>
+      <div class="footer__bottom">
+        <p>&copy; 2026 ESSIMPLEX. All rights reserved.</p>
+        <p><a href="#main">Back to top</a></p>
+      </div>
     </div>
   </footer>
-
-  <script src="app.js" defer></script>
 </body>
 </html>
