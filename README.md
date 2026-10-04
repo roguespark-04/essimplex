@@ -4,7 +4,7 @@ Commercial company homepage for **ESSIMPLEX**. Custom design and hardware produc
 
 **Nody Bot** is a **product sub-page** of the company site (`nody-bot.html`) — not a separate brand website. Same ESSIMPLEX chrome/nav throughout. Company mark: **EX hexagon monogram** (charcoal E and bronze X forming a hexagon around a small node network) + spaced “ESSIMPLEX” wordmark. Palette sampled from the logo: warm cream (`#FAF6EE` page / `#FFFBF2` cards), charcoal (`#2B2B2D` text / `#3F3F41` logo charcoal), bronze (`#7A5733` buttons & links / `#5E4326` hover / `#8B6440` rules & accents / `#D8B58B` on dark). No green in the company palette; a tiny green “online” dot appears only on the Nody Bot product page.
 
-This repo remains named `nody-box-web` for now. Static GitHub Pages from the repository root. It is **not** the collector / ops dashboard. Product surface: **website + hardware device** (USB / `etctl` provisioning). No mobile apps.
+Repo `essimplex`, published at https://roguespark-04.github.io/essimplex/. Static GitHub Pages from the repository root. It is **not** the collector / ops dashboard. Product surface: **website + hardware device** (USB / `etctl` provisioning). No mobile apps.
 
 ## Local preview
 
@@ -17,10 +17,10 @@ Open [http://127.0.0.1:4173](http://127.0.0.1:4173).
 
 ## GitHub Pages
 
-Published at `https://roguespark-04.github.io/nody-box-web/` from branch **`main`** / folder **`/ (root)`**.
+Published at `https://roguespark-04.github.io/essimplex/` from branch **`main`** / folder **`/ (root)`**.
 
-- Company: `https://roguespark-04.github.io/nody-box-web/`
-- Product: `https://roguespark-04.github.io/nody-box-web/nody-bot.html`
+- Company: `https://roguespark-04.github.io/essimplex/`
+- Product: `https://roguespark-04.github.io/essimplex/nody-bot.html`
 
 ## Design system
 
