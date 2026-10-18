@@ -4,12 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Nody Bot | Battery Ethernet phone-home | ESSIMPLEX</title>
-  <meta name="description" content="Nody Bot by ESSIMPLEX: battery-powered Ethernet phone-home for AI datacenter construction. ESP32, W5500, OLED, LiPo. Outbound heartbeat only; not pingable. Provisioned over USB with etctl." />
+  <meta name="description" content="Nody Bot by ESSIMPLEX: battery-powered Ethernet check-in device for AI datacenter construction. Wakes about every 15 minutes, reports in, then sleeps. Outbound only; not pingable. Configured over USB." />
   <link rel="canonical" href="https://essimplex.com/nody-bot.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="ESSIMPLEX" />
   <meta property="og:title" content="Nody Bot | Battery Ethernet phone-home | ESSIMPLEX" />
-  <meta property="og:description" content="Nody Bot by ESSIMPLEX: battery-powered Ethernet phone-home for AI datacenter construction. ESP32, W5500, OLED, LiPo. Outbound heartbeat only; not pingable. Provisioned over USB with etctl." />
+  <meta property="og:description" content="Nody Bot by ESSIMPLEX: battery-powered Ethernet check-in device for AI datacenter construction. Wakes about every 15 minutes, reports in, then sleeps. Outbound only; not pingable. Configured over USB." />
   <meta property="og:url" content="https://essimplex.com/nody-bot.html" />
   <meta property="og:image" content="https://essimplex.com/assets/essimplex-og.png" />
   <meta property="og:image:width" content="1200" />
@@ -17,7 +17,7 @@
   <meta property="og:image:alt" content="ESSIMPLEX logo" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Nody Bot | Battery Ethernet phone-home | ESSIMPLEX" />
-  <meta name="twitter:description" content="Nody Bot by ESSIMPLEX: battery-powered Ethernet phone-home for AI datacenter construction. ESP32, W5500, OLED, LiPo. Outbound heartbeat only; not pingable. Provisioned over USB with etctl." />
+  <meta name="twitter:description" content="Nody Bot by ESSIMPLEX: battery-powered Ethernet check-in device for AI datacenter construction. Wakes about every 15 minutes, reports in, then sleeps. Outbound only; not pingable. Configured over USB." />
   <meta name="twitter:image" content="https://essimplex.com/assets/essimplex-og.png" />
   <meta name="theme-color" content="#1E1E20" />
   <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32" />
@@ -96,7 +96,7 @@
           <h1 class="display" id="hero-heading" data-hero style="--i:1">Nody Bot</h1>
           <p class="p-hero__motto" data-hero style="--i:2">Not dead yet.</p>
           <p class="p-hero__tagline" data-hero style="--i:2">Battery Ethernet phone-home for datacenter construction</p>
-          <p class="hero__lede" data-hero style="--i:3">Hang it on the far end of a cable run. It sleeps for most of the build, wakes on a schedule, and POSTs a heartbeat so you know the drop is still alive. No PoE, and nothing left pingable.</p>
+          <p class="hero__lede" data-hero style="--i:3">Hang it on the far end of a cable run. It sleeps for most of the build, wakes on a schedule, and reports in so you know the drop is still alive. No PoE, and nothing left pingable.</p>
           <div class="actions" data-hero style="--i:4">
             <a class="btn btn--primary btn--lg" href="mailto:support@essimplex.com?subject=Nody%20Bot%20inquiry">Contact sales <svg class="ico-arrow" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             <a class="btn btn--ghost btn--lg" href="#specs">View specifications</a>
@@ -104,16 +104,16 @@
         </div>
         <aside class="stack" aria-labelledby="stack-heading" data-hero style="--i:4">
           <div class="stack__head">
-            <h2 id="stack-heading">Hardware stack</h2>
+            <h2 id="stack-heading">At a glance</h2>
             <span class="live" aria-hidden="true"><span class="live__dot"></span>Heartbeat</span>
           </div>
           <dl class="stack__rows">
-            <div><dt>MCU</dt><dd>ESP32</dd></div>
-            <div><dt>Ethernet</dt><dd>W5500</dd></div>
-            <div><dt>Display</dt><dd>OLED</dd></div>
-            <div><dt>Power</dt><dd>LiPo</dd></div>
+            <div><dt>Connection</dt><dd>Wired Ethernet</dd></div>
+            <div><dt>Power</dt><dd>Battery</dd></div>
+            <div><dt>Setup</dt><dd>USB</dd></div>
+            <div><dt>Check-in</dt><dd>~15 min</dd></div>
           </dl>
-          <p class="stack__foot">Outbound HTTP only &middot; not pingable</p>
+          <p class="stack__foot">Outbound only &middot; not pingable</p>
         </aside>
       </div>
     </section>
@@ -128,19 +128,19 @@
             <dd class="stat__note">Wakes on a timer; interval is configurable</dd>
           </div>
           <div class="stat" data-reveal style="--i:1">
-            <dt class="stat__label">Collector timeout</dt>
-            <dd class="stat__value"><span data-count="8">8</span><span class="stat__unit">s</span></dd>
-            <dd class="stat__note">Waits for an HTTP 2xx confirmation</dd>
+            <dt class="stat__label">Connection</dt>
+            <dd class="stat__value">Ethernet</dd>
+            <dd class="stat__note">Wired, no Wi-Fi dependency</dd>
           </div>
           <div class="stat" data-reveal style="--i:2">
-            <dt class="stat__label">Attempts per check-in</dt>
-            <dd class="stat__value"><span class="stat__pre">up to</span><span data-count="3">3</span></dd>
-            <dd class="stat__note">Then back to deep sleep</dd>
+            <dt class="stat__label">Power</dt>
+            <dd class="stat__value">Battery</dd>
+            <dd class="stat__note">Not PoE; sleeps between check-ins</dd>
           </div>
           <div class="stat" data-reveal style="--i:3">
             <dt class="stat__label">Provisioning</dt>
             <dd class="stat__value">USB</dd>
-            <dd class="stat__note">Bench setup with <code>etctl</code></dd>
+            <dd class="stat__note">Bench setup before it ships</dd>
           </div>
         </dl>
         <p class="stats__foot">Preliminary specifications. Subject to change before commercial availability.</p>
@@ -160,9 +160,9 @@
               <div class="seq__track"><span class="seq__fill"></span></div>
               <ol class="seq__nodes">
                 <li class="seq__node"><span class="seq__dot"></span><span class="seq__name">Wake</span></li>
-                <li class="seq__node"><span class="seq__dot"></span><span class="seq__name">DHCP</span></li>
-                <li class="seq__node"><span class="seq__dot"></span><span class="seq__name">POST</span></li>
-                <li class="seq__node"><span class="seq__dot"></span><span class="seq__name">2xx</span></li>
+                <li class="seq__node"><span class="seq__dot"></span><span class="seq__name">Connect</span></li>
+                <li class="seq__node"><span class="seq__dot"></span><span class="seq__name">Report</span></li>
+                <li class="seq__node"><span class="seq__dot"></span><span class="seq__name">Confirm</span></li>
                 <li class="seq__node"><span class="seq__dot"></span><span class="seq__name">Sleep</span></li>
               </ol>
             </div>
@@ -172,32 +172,32 @@
           <li class="step" data-step="0">
             <p class="step__kicker">Step 1 of 5</p>
             <h3 class="h3">Wake</h3>
-            <p>A timer fires about every 15 minutes. Between wakes the radio and MCU are off, with no listeners, so the battery lasts the build schedule.</p>
+            <p>A timer fires about every 15 minutes. Between wakes it sleeps with nothing listening, so the battery lasts the build schedule.</p>
             <p class="step__meta"><span>~15 min, configurable</span></p>
           </li>
           <li class="step" data-step="1">
             <p class="step__kicker">Step 2 of 5</p>
-            <h3 class="h3">DHCP</h3>
-            <p>Wired Ethernet comes up on the W5500 and the module obtains an address on the plant network.</p>
-            <p class="step__meta"><span>W5500</span><span>no Wi-Fi dependency</span></p>
+            <h3 class="h3">Connect</h3>
+            <p>Wired Ethernet comes up and the unit gets an address on the plant network.</p>
+            <p class="step__meta"><span>wired Ethernet</span><span>no Wi-Fi dependency</span></p>
           </li>
           <li class="step" data-step="2">
             <p class="step__kicker">Step 3 of 5</p>
-            <h3 class="h3">POST</h3>
-            <p>A JSON heartbeat with unit id, battery, MAC and more is POSTed to <code>/et/phone-home</code> on your collector. The server is set as an IPv4 address; the device does no DNS lookup.</p>
-            <p class="step__meta"><span>HTTP POST</span><span>IPv4 server</span></p>
+            <h3 class="h3">Report</h3>
+            <p>The unit sends a heartbeat to your collector so you know the drop is still alive.</p>
+            <p class="step__meta"><span>outbound only</span></p>
           </li>
           <li class="step" data-step="3">
             <p class="step__kicker">Step 4 of 5</p>
-            <h3 class="h3">2xx</h3>
-            <p>The unit waits for an HTTP 2xx from the collector, with an 8-second timeout and up to three tries.</p>
-            <p class="step__meta"><span>8 s timeout</span><span>up to 3 tries</span></p>
+            <h3 class="h3">Confirm</h3>
+            <p>The unit waits for your collector to confirm the check-in, retrying if needed.</p>
+            <p class="step__meta"><span>confirmed check-in</span></p>
           </li>
           <li class="step" data-step="4">
             <p class="step__kicker">Step 5 of 5</p>
             <h3 class="h3">Sleep</h3>
-            <p>It returns to deep sleep until the next wake. Nothing listens in between, so it is never pingable.</p>
-            <p class="step__meta"><span>deep sleep</span></p>
+            <p>It returns to sleep until the next wake. Nothing listens in between, so it is never pingable.</p>
+            <p class="step__meta"><span>sleep</span></p>
           </li>
         </ol>
       </div>
@@ -216,17 +216,17 @@
           <li class="card card--flat" data-reveal style="--i:0">
             <span class="card__icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
             <h3 class="h3">Not pingable by design</h3>
-            <p>Deep sleep between wakes. No ICMP, and no open ports waiting for scans on an unfinished plant.</p>
+            <p>Asleep between wakes. No ICMP, and no open ports waiting for scans on an unfinished plant.</p>
           </li>
           <li class="card card--flat" data-reveal style="--i:1">
             <span class="card__icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7" width="16" height="10" rx="2"/><path d="M21 10.5v3"/><path d="M6 10v4M9.5 10v4M13 10v4"/></svg></span>
             <h3 class="h3">Months on battery</h3>
-            <p>LiPo power, not PoE, so the far end works before power distribution is ready.</p>
+            <p>Battery power, not PoE, so the far end works before power distribution is ready.</p>
           </li>
           <li class="card card--flat" data-reveal style="--i:2">
             <span class="card__icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="7" rx="1.5"/><rect x="4" y="13" width="16" height="7" rx="1.5"/><path d="M8 7.5h.01M8 16.5h.01M12 7.5h4M12 16.5h4"/></svg></span>
             <h3 class="h3">Your collector</h3>
-            <p>Heartbeats POST to your endpoint. This site is marketing; collector and operations software ships separately.</p>
+            <p>Check-ins report to your collector. This site is marketing; collector and operations software ships separately.</p>
           </li>
         </ul>
         <div class="audience" data-reveal>
@@ -246,7 +246,7 @@
           <div class="specs__sticky">
             <p class="eyebrow" data-reveal>Specifications</p>
             <h2 class="h2" id="specs-heading" data-reveal style="--i:1">Datasheet</h2>
-            <p data-reveal style="--i:2">Preliminary hardware parameters for planning and RFQ. Specifications may change before commercial availability.</p>
+            <p data-reveal style="--i:2">Preliminary product parameters for planning and RFQ. Specifications may change before commercial availability.</p>
             <dl class="tiles tiles--stack" data-reveal style="--i:3">
               <div><dt>SKU</dt><dd>NBX-ETH-BAT</dd></div>
               <div><dt>Status</dt><dd>Preliminary</dd></div>
@@ -257,32 +257,21 @@
         </div>
         <div class="specs__tables">
           <div class="spec-group" data-reveal>
-            <h3 class="h3" id="spec-hw">Hardware</h3>
+            <h3 class="h3" id="spec-hw">Product</h3>
             <table class="spec" aria-labelledby="spec-hw"><tbody>
               <tr><th scope="row">Product / SKU</th><td>Nody Bot, NBX-ETH-BAT</td></tr>
-              <tr><th scope="row">Microcontroller</th><td>ESP32</td></tr>
-              <tr><th scope="row">Ethernet</th><td>W5500 wired Ethernet (no Wi-Fi dependency in the plant)</td></tr>
-              <tr><th scope="row">Display</th><td>OLED: unit id, battery voltage, last confirmation</td></tr>
-              <tr><th scope="row">Power</th><td>LiPo battery (not PoE)</td></tr>
+              <tr><th scope="row">Connection</th><td>Wired Ethernet (no Wi-Fi dependency in the plant)</td></tr>
+              <tr><th scope="row">Power</th><td>Battery (not PoE)</td></tr>
+              <tr><th scope="row">Setup</th><td>Configured over USB (no mobile apps)</td></tr>
             </tbody></table>
           </div>
           <div class="spec-group" data-reveal>
-            <h3 class="h3" id="spec-net">Network behaviour</h3>
+            <h3 class="h3" id="spec-net">Behaviour</h3>
             <table class="spec" aria-labelledby="spec-net"><tbody>
               <tr><th scope="row">Wake interval</th><td>~15 minutes (configurable)</td></tr>
-              <tr><th scope="row">Reachability</th><td>Outbound HTTP POST only; not ICMP-pingable</td></tr>
-              <tr><th scope="row">Heartbeat payload</th><td>JSON status to customer collector endpoint</td></tr>
-              <tr><th scope="row">Endpoint</th><td><code>POST /et/phone-home</code></td></tr>
-              <tr><th scope="row">Confirmation</th><td>HTTP 2xx; 8 s timeout, up to 3 tries</td></tr>
-              <tr><th scope="row">Server address</th><td>IPv4 address (no DNS)</td></tr>
-            </tbody></table>
-          </div>
-          <div class="spec-group" data-reveal>
-            <h3 class="h3" id="spec-dep">Deployment</h3>
-            <table class="spec" aria-labelledby="spec-dep"><tbody>
-              <tr><th scope="row">Provisioning</th><td>USB + <code>etctl</code> (no mobile apps)</td></tr>
+              <tr><th scope="row">Reachability</th><td>Outbound check-in only; not pingable</td></tr>
               <tr><th scope="row">Deployment</th><td>Far end of cable runs during datacenter construction</td></tr>
-              <tr><th scope="row">Operating intent</th><td>Multi-month build schedules; deep sleep between wake windows</td></tr>
+              <tr><th scope="row">Operating intent</th><td>Multi-month build schedules; sleeps between check-ins</td></tr>
             </tbody></table>
           </div>
         </div>
@@ -294,18 +283,18 @@
         <div class="section-head section-head--split">
           <div>
             <p class="eyebrow" data-reveal>Provisioning</p>
-            <h2 class="h2" id="prov-heading" data-reveal style="--i:1">Configured over USB with <code>etctl</code>.</h2>
+            <h2 class="h2" id="prov-heading" data-reveal style="--i:1">Configured over USB.</h2>
           </div>
           <p class="lede" data-reveal style="--i:2">Units are set up on the bench before they reach the plant. The product surface is this website and the hardware device.</p>
         </div>
         <ol class="prov__list" role="list">
-          <li class="prov__item" data-reveal><span class="prov__k">Bench</span><p>Set the collector address (IPv4), unit identity and wake interval</p></li>
-          <li class="prov__item" data-reveal style="--i:1"><span class="prov__k">Verify</span><p>Verify battery and Ethernet bring-up on the bench</p></li>
+          <li class="prov__item" data-reveal><span class="prov__k">Bench</span><p>Set the collector address, unit identity and wake interval</p></li>
+          <li class="prov__item" data-reveal style="--i:1"><span class="prov__k">Verify</span><p>Verify the battery and Ethernet connection on the bench</p></li>
           <li class="prov__item" data-reveal style="--i:2"><span class="prov__k">Ship</span><p>Ship configured modules to the far-end install crew</p></li>
         </ol>
         <div class="prov__ships" data-reveal>
           <p class="prov__ships-k">What ships</p>
-          <p>The Nody Bot module (ESP32, W5500, OLED, LiPo) and the USB provisioning path. The collector backend is separate.</p>
+          <p>The Nody Bot unit and its USB setup path. The collector backend is separate.</p>
         </div>
       </div>
     </section>

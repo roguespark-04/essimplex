@@ -148,8 +148,8 @@
           <p class="lede" data-reveal style="--i:3">Battery-powered Ethernet phone-home for datacenter construction. It hangs on the far end of a cable run and wakes on a schedule to prove the drop is still alive, through months of cabling, without PoE and without staying pingable.</p>
           <ul class="checks" role="list" data-reveal style="--i:4">
             <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>Outbound heartbeat only.</strong> Not ICMP-pingable; no always-on listener on an unfinished network.</span></li>
-            <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>LiPo battery, not PoE.</strong> Works at the far end before power distribution is ready.</span></li>
-            <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>Provisioned over USB with <code>etctl</code>.</strong> Set up on the bench, then shipped to the install crew.</span></li>
+            <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>Battery powered, not PoE.</strong> Works at the far end before power distribution is ready.</span></li>
+            <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>Configured over USB.</strong> Set up on the bench, then shipped to the install crew.</span></li>
           </ul>
           <div class="actions" data-reveal style="--i:5">
             <a class="btn btn--primary" href="nody-bot.html">View Nody Bot <svg class="ico-arrow" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -169,20 +169,20 @@
             <li class="diagram__link" aria-hidden="true"><span class="diagram__pkt"><span></span></span></li>
             <li class="diagram__node">
               <span class="diagram__name">Plant network</span>
-              <span class="diagram__meta">DHCP address</span>
+              <span class="diagram__meta">Wired Ethernet</span>
             </li>
             <li class="diagram__link" aria-hidden="true"><span class="diagram__pkt"><span></span></span></li>
             <li class="diagram__node diagram__node--end">
               <span class="diagram__name">Your collector</span>
-              <span class="diagram__meta">IPv4 address, no DNS</span>
+              <span class="diagram__meta">Receives the check-in</span>
             </li>
           </ol>
           <div class="diagram__rows">
-            <div><span class="diagram__k">Request</span><code>POST /et/phone-home</code></div>
-            <div><span class="diagram__k">Confirm</span><span>HTTP 2xx &middot; 8 s timeout &middot; up to 3 tries</span></div>
-            <div><span class="diagram__k">Then</span><span>Deep sleep until the next wake (~15 min)</span></div>
+            <div><span class="diagram__k">Report</span><span>Heartbeat to your collector</span></div>
+            <div><span class="diagram__k">Confirm</span><span>Collector confirms the check-in</span></div>
+            <div><span class="diagram__k">Then</span><span>Sleep until the next wake (~15 min)</span></div>
           </div>
-          <figcaption class="visually-hidden" id="diagram-cap">Nody Bot check-in path: the device at the far end of the cable run gets a DHCP address on the plant network and POSTs a JSON heartbeat to your collector at an IPv4 address, waits for HTTP 2xx, then sleeps.</figcaption>
+          <figcaption class="visually-hidden" id="diagram-cap">Nody Bot check-in path: the device at the far end of the cable run connects over wired Ethernet, sends a heartbeat to your collector, waits for confirmation, then sleeps.</figcaption>
         </figure>
       </div>
     </section>
@@ -197,19 +197,19 @@
             <dd class="stat__note">Wakes on a timer; interval is configurable</dd>
           </div>
           <div class="stat" data-reveal style="--i:1">
-            <dt class="stat__label">Collector timeout</dt>
-            <dd class="stat__value"><span data-count="8">8</span><span class="stat__unit">s</span></dd>
-            <dd class="stat__note">Waits for an HTTP 2xx confirmation</dd>
+            <dt class="stat__label">Connection</dt>
+            <dd class="stat__value">Ethernet</dd>
+            <dd class="stat__note">Wired, no Wi-Fi dependency</dd>
           </div>
           <div class="stat" data-reveal style="--i:2">
-            <dt class="stat__label">Attempts per check-in</dt>
-            <dd class="stat__value"><span class="stat__pre">up to</span><span data-count="3">3</span></dd>
-            <dd class="stat__note">Then back to deep sleep</dd>
+            <dt class="stat__label">Power</dt>
+            <dd class="stat__value">Battery</dd>
+            <dd class="stat__note">Not PoE; sleeps between check-ins</dd>
           </div>
           <div class="stat" data-reveal style="--i:3">
             <dt class="stat__label">Provisioning</dt>
             <dd class="stat__value">USB</dd>
-            <dd class="stat__note">Bench setup with <code>etctl</code></dd>
+            <dd class="stat__note">Bench setup before it ships</dd>
           </div>
         </dl>
         <p class="stats__foot">Preliminary specifications. Subject to change before commercial availability.</p>
@@ -237,23 +237,23 @@
           </li>
           <li class="cycle__item" style="--i:1">
             <span class="cycle__dot" aria-hidden="true"></span>
-            <h3 class="h3">DHCP</h3>
+            <h3 class="h3">Connect</h3>
             <p>Wired Ethernet comes up and gets an address.</p>
           </li>
           <li class="cycle__item" style="--i:2">
             <span class="cycle__dot" aria-hidden="true"></span>
-            <h3 class="h3">POST</h3>
-            <p>A JSON heartbeat goes to <code>/et/phone-home</code>.</p>
+            <h3 class="h3">Report</h3>
+            <p>A heartbeat goes to your collector.</p>
           </li>
           <li class="cycle__item" style="--i:3">
             <span class="cycle__dot" aria-hidden="true"></span>
-            <h3 class="h3">2xx</h3>
-            <p>It waits for HTTP 2xx: 8 s timeout, up to 3 tries.</p>
+            <h3 class="h3">Confirm</h3>
+            <p>It waits for your collector to confirm.</p>
           </li>
           <li class="cycle__item" style="--i:4">
             <span class="cycle__dot" aria-hidden="true"></span>
             <h3 class="h3">Sleep</h3>
-            <p>Back to deep sleep. Nothing listens in between.</p>
+            <p>Back to sleep. Nothing listens in between.</p>
           </li>
         </ol>
       </div>
